@@ -1,57 +1,6 @@
-server:
-  port: ${server-port:9898}
 
-spring:
-  application:
-    name: dispatcher
-  kafka:
-    bootstrap-servers: ${kafka_servers:kafka:60307,kafka:60308,kafka:60309}
-    consumers:
-      ota:
-        topic: ota_data
-        groupId: ${otaGroup:dispatcher}
-        listener: com.saicmotor.maxus.icsp.access.maxus.dispatcher.kafka.OtaDispatcherListener
-        valueDeserializer: org.apache.kafka.common.serialization.StringDeserializer
-      register:
-        topic: register_data
-        groupId: ${registerGroup:dispatcher}
-        listener: com.saicmotor.maxus.icsp.access.maxus.dispatcher.kafka.RegisterDispatcherListener
-        valueDeserializer: org.apache.kafka.common.serialization.StringDeserializer
-      location:
-        topic: location_data
-        groupId: ${locationGroup:dispatcher}
-        listener: com.saicmotor.maxus.icsp.access.maxus.dispatcher.kafka.LocationDispatcherListener
-        valueDeserializer: org.apache.kafka.common.serialization.StringDeserializer
-    producer:
-       valueSerializer: com.saicmotor.maxus.icsp.access.maxus.dispatcher.common.KafkaJsonSerializer
-  redis:
-    host: ${redis_host:redis}
-    port: ${redis_port:60318}
-    database: ${redis_db:3}
-    password: ${redis_pwd:Pass1234}
-
-dispatcher:
-  valuesValid: ${valuesValid:false}
-  statusTopic: ${statusTopic:dispatcher_status_data}
-  locationTopic: ${locationTopic:dispatcher_location_data}
-  callBack: ${callBack:true}
-  registerResultTopic: ${registerResultTopic:register_result_data}
-  commandStatusResponseTopic: ${commandStatusResponseTopic:command_status_response}
-  debugTopic: ${debugTopic:debug_data}
-  vehicleTopic: ${vehicleTopic:vehBusiness_data}
-  bluetoothKeyTopic: ${bluetoothKeyTopic:bluetooth_data}
-  sendBluetoothData: ${sendBluetoothData:true}
-  realTimeDataLocationFlag: ${realTimeDataLocationFlag:true}
-  kafkaAcks: ${kafkaAcks:1}
-  kafkaLinger: ${kafkaLinger:50}
-  kafkaRetries: ${kafkaRetries:1}
-  kafkaRetryBackoff: ${kafkaRetryBackoff:2000}
-  kafkaReconnectBackoff: ${kafkaReconnectBackoff:3000}
-  kafkaCompressionType: ${kafkaCompressionType:gzip}
-  dispatchUploadTopic: ${dispatchUploadTopic:protocol_adapter_data}
-  logBack: ${logBack:true}
-  logTopic: ${logTopic:logger_data}
+project:
 
 logging:
   level:
-    com.saicmotor.maxus.icsp.access.maxus.dispatcher: ${logging_level:info}
+    com.dream.server: ${logging_level:debug}
