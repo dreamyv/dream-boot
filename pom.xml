@@ -17,6 +17,7 @@
 
     <modules>
         <module>dream-server</module>
+        <module>dream-core</module>
     </modules>
 
     <properties>
@@ -39,6 +40,7 @@
         <hbase.version>1.1.2</hbase.version>
         <spring-boot-starter-thymeleaf.version>2.0.3.RELEASE</spring-boot-starter-thymeleaf.version>
         <druid.version>1.1.12</druid.version>
+        <spring-cloud-context.version>1.3.0.RELEASE</spring-cloud-context.version>
     </properties>
 
     <!-- 基础引用 -->
@@ -97,6 +99,32 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+        <!--需要引入该jar才能使bootstrap配置文件生效-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-context</artifactId>
+            <version>${spring-cloud-context.version}</version>
+        </dependency>
+        <!--
+          swagger2 SpringFox Swagger
+          集成Swagger，方便服务访问，需要在SpringApplication类中，增加注解@EnableSwagger注解
+          继承后启动应用即可访问API:http://xxxx/swagger-ui.html
+        -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox.swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox.swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-staticdocs</artifactId>
+            <version>${springfox.swagger2.version}</version>
         </dependency>
     </dependencies>
     <!-- 基础jar包引用结束 -->
@@ -178,26 +206,6 @@
                 <groupId>org.mvel</groupId>
                 <artifactId>mvel2</artifactId>
                 <version>${mvel.version}</version>
-            </dependency>
-            <!--
-              swagger2 SpringFox Swagger
-              集成Swagger，方便服务访问，需要在SpringApplication类中，增加注解@EnableSwagger注解
-              继承后启动应用即可访问API:http://xxxx/swagger-ui.html
-            -->
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${springfox.swagger2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${springfox.swagger2.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-staticdocs</artifactId>
-                <version>${springfox.swagger2.version}</version>
             </dependency>
 
             <!--kafka-->

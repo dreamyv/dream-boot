@@ -1,0 +1,6 @@
+
+project:
+
+logging:
+  level:
+    com.dream.server: ${logging_level:debug}
