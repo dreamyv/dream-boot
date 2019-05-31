@@ -1,0 +1,12 @@
+server:
+  port: ${server-port:9898}
+
+spring:
+  application:
+    name: dispatcher
+
+project:
+
+logging:
+  level:
+    com.dream.server: ${logging_level:debug}

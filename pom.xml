@@ -19,7 +19,6 @@
         <module>dream-server</module>
     </modules>
 
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -41,18 +40,6 @@
         <spring-boot-starter-thymeleaf.version>2.0.3.RELEASE</spring-boot-starter-thymeleaf.version>
         <druid.version>1.1.12</druid.version>
     </properties>
-
-    <profiles>
-        <profile>
-            <id>disable-java8-doclint</id>
-            <activation>
-                <jdk>[1.8,)</jdk>
-            </activation>
-            <properties>
-                <additionalparam>-Xdoclint:none</additionalparam>
-            </properties>
-        </profile>
-    </profiles>
 
     <!-- 基础引用 -->
     <dependencies>
@@ -111,9 +98,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
-
     </dependencies>
+    <!-- 基础jar包引用结束 -->
 
+    <!-- 插件jar包定义,需要在子工程引用 -->
     <dependencyManagement>
         <dependencies>
             <!--
@@ -128,7 +116,6 @@
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
-                <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>org.mybatis</groupId>
@@ -257,5 +244,16 @@
         </dependencies>
     </dependencyManagement>
 
+    <profiles>
+        <profile>
+            <id>disable-java8-doclint</id>
+            <activation>
+                <jdk>[1.8,)</jdk>
+            </activation>
+            <properties>
+                <additionalparam>-Xdoclint:none</additionalparam>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
