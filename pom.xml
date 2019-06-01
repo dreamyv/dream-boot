@@ -45,6 +45,8 @@
         <thymeleaf-layout-dialect.version>2.0.0</thymeleaf-layout-dialect.version>
         <druid.version>1.0.18</druid.version>
         <spring-cloud-context.version>1.3.0.RELEASE</spring-cloud-context.version>
+        <!-- 邮件 -->
+        <spring-boot-starter-mail.version>1.5.2.RELEASE</spring-boot-starter-mail.version>
     </properties>
 
     <!-- 基础引用 -->
@@ -135,24 +137,7 @@
     <!-- 插件jar包定义,需要在子工程引用 -->
     <dependencyManagement>
         <dependencies>
-            <!--
-                MyBatis Spring Boot Starter
-                由于MyBatis3发布时Spring Boot已经发布，因此这里暂时没有Spring官方的myBatis Starter
-            -->
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.spring.boot.starter.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>org.mybatis</groupId>
-                <artifactId>mybatis-spring</artifactId>
-            </dependency>
-            <!-- 使用driuid数据源 -->
+             <!--使用driuid数据源-->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
@@ -172,82 +157,12 @@
                 <version>${protostuff.version}</version>
             </dependency>
 
-            <!-- validator-数据校验框架 -->
+            <!-- 支持发送邮件 -->
             <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-validator</artifactId>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-mail</artifactId>
+                <version>${spring-boot-starter-mail.version}</version>
             </dependency>
-
-            <!--jsonpath-->
-            <dependency>
-                <groupId>com.jayway.jsonpath</groupId>
-                <artifactId>json-path</artifactId>
-            </dependency>
-            <!--jackson-->
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <optional>true</optional>
-            </dependency>
-
-            <!-- poi -->
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-ooxml</artifactId>
-            </dependency>
-
-            <!--mvel-->
-            <dependency>
-                <groupId>org.mvel</groupId>
-                <artifactId>mvel2</artifactId>
-                <version>${mvel.version}</version>
-            </dependency>
-
-            <!--kafka-->
-            <dependency>
-                <groupId>org.apache.kafka</groupId>
-                <artifactId>kafka_2.11</artifactId>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-log4j12</artifactId>
-                    </exclusion>
-                </exclusions>
-                <optional>true</optional>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.kafka</groupId>
-                <artifactId>kafka-clients</artifactId>
-                <optional>true</optional>
-            </dependency>
-
-            <!-- redis -->
-            <dependency>
-                <groupId>redis.clients</groupId>
-                <artifactId>jedis</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-redis</artifactId>
-            </dependency>
-
-            <!-- hbase-->
-            <dependency>
-                <groupId>org.apache.hbase</groupId>
-                <artifactId>hbase-shaded-client</artifactId>
-                <version>${hbase.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-log4j12</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
