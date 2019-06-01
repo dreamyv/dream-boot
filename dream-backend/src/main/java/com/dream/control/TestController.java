@@ -1,8 +1,10 @@
 package com.dream.control;
 
+import com.dream.sms.ServerTest;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +21,7 @@ public class TestController {
     @ApiOperation("跳转页面Test页面")
     @RequestMapping(value = "/")
      public String index(){
-        logger.info("进来了test");
+       logger.info("进来了test");
        return "text";
      }
 }

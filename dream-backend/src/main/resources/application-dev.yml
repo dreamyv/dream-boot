@@ -7,6 +7,13 @@ spring:
     encoding: UTF-8
     content-type: text/html  #与Servlet中设置输出对应属性效果一致
     mode: HTML5
+  mail:
+    default-encoding: UTF-8
+    host: smtp.163.com
+    port: 25 #端口
+    protocol: smtp #协议
+    username: hnlyjmy@163.com #发送者的邮箱账号
+    password: qweasdzxc123 #发送者的邮箱密码
 
 logging:
   level:
