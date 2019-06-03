@@ -9,19 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>dream-gateway-server</artifactId>
+    <artifactId>dream-util</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.dream.boot</groupId>
-            <artifactId>dream-core</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>4.1.19.Final</version>
-        </dependency>
-    </dependencies>
 
 </project>

@@ -1,0 +1,14 @@
+###########################
+# Spring Cloud 构建于 Spring Boot 之上，在 Spring Boot 中有两种上下文，一种是 bootstrap, 另外一种是 application,
+# bootstrap 是应用程序的父上下文，也就是说 bootstrap 加载优先于 applicaton。
+# bootstrap 主要用于从额外的资源来加载配置信息，还可以在本地外部配置文件中解密属性。
+# 这两个上下文共用一个环境，它是任何Spring应用程序的外部属性的来源。bootstrap 里面的属性会优先加载，它们默认也不能被本地相同配置覆盖。
+###########################
+server:
+  port: ${server-port:8084}
+
+spring:
+  application:
+    name: tcuServer
+  profiles:
+    active: dev #指定配置文件

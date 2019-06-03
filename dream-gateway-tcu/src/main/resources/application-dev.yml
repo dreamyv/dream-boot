@@ -1,0 +1,16 @@
+
+logging:
+  level:
+    com.dream.server: ${logging_level:debug}
+
+project:
+  serverIp: ${serverIp:127.0.0.1}
+  serverPort: ${serverPort:8083}
+  timeout: ${timeout:10}
+  reconnectMaxNum: ${reconnectMaxNum:20}
+  maxFrameLength: ${maxFrameLength:102400}
+  lengthFieldOffset: ${lengthFieldOffset:59}
+  lengthFieldLength: ${lengthFieldLength:4}
+  lengthAdjustment: ${lengthAdjustment:1}
+  initialBytesToStrip: ${initialBytesToStrip:0}
+  failFast: ${failFast:true}

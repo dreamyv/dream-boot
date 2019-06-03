@@ -1,10 +1,10 @@
 package com.dream.core.netty;
 
 /**
- * 定义服务端公共接口
+ * 定义客户端公共接口
  */
 @SuppressWarnings("all")
-public interface IServer {
+public interface IClient {
     /**
      * 启动
      */

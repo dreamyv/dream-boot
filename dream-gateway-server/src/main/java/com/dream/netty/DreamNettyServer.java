@@ -1,6 +1,7 @@
 package com.dream.netty;
 
 import com.dream.config.ProjectProperties;
+import com.dream.core.netty.decode.MessageDecode;
 import com.dream.core.netty.server.AbstractNettyServer;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;

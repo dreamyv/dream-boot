@@ -22,6 +22,7 @@
         <module>dream-sms</module>
         <module>dream-gateway-server</module>
         <module>dream-gateway-tcu</module>
+        <module>dream-util</module>
     </modules>
 
     <properties>
