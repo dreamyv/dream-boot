@@ -6,9 +6,9 @@ logging:
 project:
   port: ${gatePort:8111}
   timeout: ${timeout:90}
-  maxFrameLength: ${maxFrameLength:102400}
-  lengthFieldOffset: ${lengthFieldOffset:59}
-  lengthFieldLength: ${lengthFieldLength:4}
-  lengthAdjustment: ${lengthAdjustment:1}
-  initialBytesToStrip: ${initialBytesToStrip:0}
+  maxFrameLength: ${maxFrameLength:102400} #一条报文最大长度
+  lengthFieldOffset: ${lengthFieldOffset:21} #长度字段下标
+  lengthFieldLength: ${lengthFieldLength:1} #长度字段长度
+  lengthAdjustment: ${lengthAdjustment:1} #
+  initialBytesToStrip: ${initialBytesToStrip:0} #忽略数据长度
   failFast: ${failFast:true}

@@ -11,6 +11,6 @@ project:
   maxFrameLength: ${maxFrameLength:102400}
   lengthFieldOffset: ${lengthFieldOffset:59}
   lengthFieldLength: ${lengthFieldLength:4}
-  lengthAdjustment: ${lengthAdjustment:1}
+  lengthAdjustment: ${lengthAdjustment:0}
   initialBytesToStrip: ${initialBytesToStrip:0}
   failFast: ${failFast:true}

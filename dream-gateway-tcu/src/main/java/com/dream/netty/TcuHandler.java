@@ -68,22 +68,23 @@ public class TcuHandler extends ChannelInboundHandlerAdapter {
      */
     private ByteBuf getHeartBeat() {
         byte[] commonHead = new byte[24];
-//        commonHead[0]=(byte)0x23;
-//        commonHead[1]=(byte)0x23;
-//        commonHead[2]=(byte)0x07;//心跳指令
-//        commonHead[3]=(byte)0xFE;
-//        byte[] vinBytes = "ABCDE600000000009".getBytes();
-//        for (int i = 0; i < vinBytes.length ; i++) {
-//            commonHead[i+4] = vinBytes[i];
-//        }
-//        commonHead[21]= (byte)0x01;
-//        byte[] bytes = ByteUtil.shortToBytes((short) 0);
-//        commonHead[22]=bytes[0];
-//        commonHead[23]=bytes[1];
+        commonHead[0]=(byte)0x23;
+        commonHead[1]=(byte)0x23;
+        commonHead[2]=(byte)0x07;//心跳指令
+        commonHead[3]=(byte)0xFE;
+        byte[] vinBytes = "ABCDE600000000009".getBytes();
+        for (int i = 0; i < vinBytes.length ; i++) {
+            commonHead[i+4] = vinBytes[i];
+        }
+        commonHead[21]= (byte)0x01;
+        byte[] bytes = ByteUtil.shortToBytes((short) 0);
+        commonHead[22]=bytes[0];
+        commonHead[23]=bytes[1];
         byte[] heartBytes = addCommonTail(commonHead);
         ByteBuf byteBuf = Unpooled.buffer();
         byteBuf.order(ByteOrder.BIG_ENDIAN);
         byteBuf.writeBytes(heartBytes);
+        LOGGER.info(ByteUtil.bytesToHexString(ByteUtil.decodeValue(byteBuf.nioBuffer())));
         return byteBuf;
     }
 
