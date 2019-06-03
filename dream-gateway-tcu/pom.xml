@@ -9,17 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>dream-core</artifactId>
+    <artifactId>dream-gateway-tcu</artifactId>
 
-
-    <dependencies>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>4.1.19.Final</version>
-            <optional>true</optional>
-        </dependency>
-
-    </dependencies>
 
 </project>

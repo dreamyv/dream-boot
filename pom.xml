@@ -20,6 +20,8 @@
         <module>dream-core</module>
         <module>dream-backend</module>
         <module>dream-sms</module>
+        <module>dream-gateway-server</module>
+        <module>dream-gateway-tcu</module>
     </modules>
 
     <properties>

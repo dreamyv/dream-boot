@@ -1,0 +1,14 @@
+
+logging:
+  level:
+    com.dream.server: ${logging_level:debug}
+
+project:
+  port: ${gatePort:8111}
+  timeout: ${timeout:90}
+  maxFrameLength: ${maxFrameLength:102400}
+  lengthFieldOffset: ${lengthFieldOffset:59}
+  lengthFieldLength: ${lengthFieldLength:4}
+  lengthAdjustment: ${lengthAdjustment:1}
+  initialBytesToStrip: ${initialBytesToStrip:0}
+  failFast: ${failFast:true}

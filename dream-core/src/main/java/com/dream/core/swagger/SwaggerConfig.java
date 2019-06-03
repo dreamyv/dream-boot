@@ -25,7 +25,7 @@ public class SwaggerConfig {
 
     @Bean
     public Docket api() {
-        logger.info("初始化swagger-ui-----------------初始化swagger-ui");
+        logger.info("-----------------初始化swagger-ui-----------------");
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .pathMapping("/")
