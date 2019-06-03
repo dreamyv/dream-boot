@@ -1,6 +1,8 @@
 package com.dream.netty;
 
 import com.dream.core.netty.cache.CommonCache;
+import com.dream.util.ByteUtil;
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -11,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.nio.ByteBuffer;
+
 /**
  * Netty业务拆包处理器
  */
@@ -19,7 +23,7 @@ import org.springframework.stereotype.Service;
 @SuppressWarnings("all")
 public class MessageHandler extends ChannelInboundHandlerAdapter {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(MessageHandler.class);
+    private final static Logger logger = LoggerFactory.getLogger(MessageHandler.class);
 
     /**
      * 接收netty数据(拆包后的数据)
@@ -27,14 +31,21 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if(msg!=null){
-            LOGGER.info("receive protrocol {}",msg);
+            if(!(msg instanceof ByteBuf)) {
+                logger.warn("接收来自国标的数据不是ByteBuf类型!");
+                return;
+            }
+            ByteBuf byteBuf = (ByteBuf)msg;
+            ByteBuffer byteBuffer = byteBuf.nioBuffer();
+            byte[] bytes = ByteUtil.decodeValue(byteBuffer);
+            logger.info("receive:{}",ByteUtil.bytesToHexString(bytes));
         }
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception{
         Channel channel = ctx.channel();
-        LOGGER.debug("client ip [{}] disconnected succeed",channel.remoteAddress().toString());
+        logger.debug("client ip [{}] disconnected succeed",channel.remoteAddress().toString());
         if(CommonCache.channelSnMap.containsKey(channel)){
             String sn = CommonCache.channelSnMap.get(channel);
             CommonCache.channelSnMap.remove(channel);
@@ -46,7 +57,7 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
 //                JSONObject jsonObject = JSONObject.parseObject(cacheData);
 //                jsonObject.put(Constans.LOGIN,Boolean.FALSE);
 //                redisHandler.set(sn,JSONObject.toJSONString(jsonObject));
-                LOGGER.debug("sn[{}] disconnected clean cache logout succeed",sn);
+                logger.debug("sn[{}] disconnected clean cache logout succeed",sn);
 //            }
         }
         super.channelInactive(ctx);
@@ -54,7 +65,7 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx)  throws Exception{
-        LOGGER.debug("client ip [{}] connected succeed",ctx.channel().remoteAddress().toString());
+        logger.debug("client ip [{}] connected succeed",ctx.channel().remoteAddress().toString());
         super.channelActive(ctx);
     }
 

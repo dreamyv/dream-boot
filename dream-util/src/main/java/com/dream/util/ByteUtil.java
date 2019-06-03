@@ -578,7 +578,24 @@ public class ByteUtil {
         return decimal;
     }
 
-    public static void main(String[] args) {
-        System.out.println( bytesToHexString(intToBytes(127)));
+    /**
+     * ByteBuffer转byte数组
+     */
+    public static byte[] decodeValue(ByteBuffer bytes) {
+        int len = bytes.limit() - bytes.position();
+        byte[] bytes1 = new byte[len];
+        bytes.get(bytes1);
+        return bytes1;
     }
+
+    /**
+     * byte数组转ByteBuffer
+     */
+    public static ByteBuffer encodeValue(byte[] value) {
+        ByteBuffer byteBuffer = ByteBuffer.allocate(value.length);
+        byteBuffer.clear();
+        byteBuffer.get(value, 0, value.length);
+        return byteBuffer;
+    }
+
 }
