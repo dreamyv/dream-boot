@@ -6,7 +6,7 @@ logging:
 project:
   serverIp: ${serverIp:127.0.0.1}
   serverPort: ${serverPort:8111}
-  timeout: ${timeout:10}
+  timeout: ${timeout:3}
   reconnectMaxNum: ${reconnectMaxNum:20}
   maxFrameLength: ${maxFrameLength:102400}
   lengthFieldOffset: ${lengthFieldOffset:59}
