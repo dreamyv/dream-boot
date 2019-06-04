@@ -27,8 +27,7 @@ public class TcuApplication {
      */
     @Bean
     public TcuClient client() {
-        TcuClient client = new TcuClient(properties.getServerIp(), properties.getServerPort());
-        client.setConnectMaxNum(properties.getReconnectMaxNum());
+        TcuClient client = new TcuClient(properties.getServerIp(), properties.getServerPort(),properties.getReconnectMaxNum());
         return client;
     }
 

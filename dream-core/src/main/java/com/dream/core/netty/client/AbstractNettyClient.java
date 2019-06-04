@@ -12,6 +12,9 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * netty客户端抽象公用类
+ */
 @SuppressWarnings("all")
 public abstract class AbstractNettyClient implements IClient {
     private static Logger logger = LoggerFactory.getLogger(AbstractNettyClient.class);
@@ -57,9 +60,10 @@ public abstract class AbstractNettyClient implements IClient {
      */
     private ExecutorService executor = Executors.newFixedThreadPool(8);
 
-    public AbstractNettyClient(String ip, int port) {
+    public AbstractNettyClient(String ip, int port,int connectMaxNum) {
         this.ip = ip;
         this.port = port;
+        this.connectMaxNum = connectMaxNum;
     }
 
     public AbstractNettyClient() {
@@ -156,9 +160,9 @@ public abstract class AbstractNettyClient implements IClient {
      */
     public void reConnect() {
         if (!isClosed && !isConnected && (connectNum++ < connectMaxNum)) {
-            logger.info("---------- Client re Connect num:[{}] ---------- " , connectNum);
+            logger.info("---------- Client re Connect num:[{}],connectMaxNum:[{}]---------- " , connectNum,connectMaxNum);
             try {
-                Thread.sleep(2000);
+                Thread.sleep(3000);
                 connect();
             } catch (Exception e) {
                 logger.error("netty 重连服务端失败!", e);
@@ -186,6 +190,14 @@ public abstract class AbstractNettyClient implements IClient {
         });
     }
 
+    public void start() {
+        connect();
+    }
+
+    public void stop() {
+        workerGroup.shutdownGracefully();
+    }
+
     public boolean isClose() {
         return isClosed;
     }
@@ -196,14 +208,6 @@ public abstract class AbstractNettyClient implements IClient {
 
     public void setClosed(boolean closed) {
         this.isClosed = closed;
-    }
-
-    public void start() {
-        connect();
-    }
-
-    public void stop() {
-        workerGroup.shutdownGracefully();
     }
 
     public String getIp() {

@@ -23,8 +23,8 @@ public class TcuClient extends AbstractNettyClient {
     @Autowired
     private TcuHandler tcuHandler;
 
-    public TcuClient(String ip, int port) {
-        super(ip, port);
+    public TcuClient(String ip, int port,int connectMaxNum) {
+        super(ip, port,connectMaxNum);
     }
 
     @PostConstruct
