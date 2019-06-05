@@ -19,7 +19,12 @@
             <version>4.1.19.Final</version>
             <optional>true</optional>
         </dependency>
-
+        <dependency>
+            <groupId>com.dream.boot</groupId>
+            <artifactId>dream-util</artifactId>
+            <version>${project.version}</version>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
 </project>

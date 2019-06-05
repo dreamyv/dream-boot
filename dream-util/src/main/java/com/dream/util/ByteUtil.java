@@ -1,9 +1,11 @@
 package com.dream.util;
 
+
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -174,8 +176,6 @@ public class ByteUtil {
 
     /**
      * 16进制转字节数组
-     * @param hexString
-     * @return
      */
     public static byte[] hexStringToBytes(String hexString) {
         if (hexString == null || hexString.equals("")) {
@@ -247,8 +247,6 @@ public class ByteUtil {
 
     /**
      * 字节数组转换为字符
-     * @param b
-     * @return
      */
     public static char bytesToChar(byte[] b) {
         char c = (char) (((b[0] & 0xFF) << 8) | (b[1] & 0xFF));
@@ -257,21 +255,17 @@ public class ByteUtil {
 
     /**
      * 字节数组转换为16进制字符串
-     * @param src
-     * @return
      */
     public static String byteToHexString(byte src){
         byte [] bytes = new byte[1];
         bytes[0] = src;
-        return bytesToHexString(bytes);
+        return bytesToHexString(bytes,true);
     }
 
     /**
      * 字节数组转换为16进制字符串
-     * @param src
-     * @return
      */
-    public static String bytesToHexString(byte[] src){
+    public static String bytesToHexString(byte[] src,boolean space){
         StringBuilder stringBuilder = new StringBuilder("");
         if (src == null || src.length <= 0) {
             return "";
@@ -282,10 +276,21 @@ public class ByteUtil {
             if (hv.length() < 2) {
                 stringBuilder.append(0);
             }
-            stringBuilder.append(hv).append(" ");
+            stringBuilder.append(hv);
+            if(space){
+                stringBuilder.append(" ");
+            }
         }
         return stringBuilder.toString().toUpperCase();
     }
+
+    /**
+     * 字节数组转换为16进制字符串
+     */
+    public static String bytesToHexString(byte[] src){
+        return bytesToHexString(src,false);
+    }
+
     /**
      * 转换short为byte,网络字节序
      */
@@ -598,4 +603,39 @@ public class ByteUtil {
         return byteBuffer;
     }
 
+    /**
+     * 字节类型转16进制
+     */
+    public static String byteToHex(byte bs[]) {
+        StringBuffer sb = new StringBuffer();
+        if (bs != null && bs.length > 0) {
+            for (int i = 0; i < bs.length; i++)
+                sb.append(byteToHex(bs[i]));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 字节类型转16进制
+     */
+    public static String byteToHex(byte b) {
+        String hex = Integer.toHexString(b & 0xff);
+        if (hex.length() == 1)
+            hex = (new StringBuilder(String.valueOf('0'))).append(hex).toString();
+        return hex.toUpperCase();
+    }
+
+    /**
+     * 国标时间数组转long值
+     */
+    public static Long gbTimeArrayLong(byte[] bytes1){
+        int year = Short.toUnsignedInt(bytes1[0])+2000;
+        int month = Byte.toUnsignedInt(bytes1[1]);
+        int day = Byte.toUnsignedInt(bytes1[2]);
+        int hour = Byte.toUnsignedInt(bytes1[3]);
+        int minute = Byte.toUnsignedInt(bytes1[4]);
+        int seconds = Byte.toUnsignedInt(bytes1[5]);
+        Date date = DateUtil.parseDate(year, month, day, hour, minute, seconds);
+        return date.getTime();
+    }
 }

@@ -1,6 +1,7 @@
 package com.dream.netty;
 
 import com.dream.core.netty.cache.CommonCache;
+import com.dream.handler.MessageHandler;
 import com.dream.util.ByteUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
@@ -11,6 +12,7 @@ import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.nio.ByteBuffer;
@@ -21,9 +23,12 @@ import java.nio.ByteBuffer;
 @ChannelHandler.Sharable
 @Service
 @SuppressWarnings("all")
-public class MessageHandler extends ChannelInboundHandlerAdapter {
+public class MessageChanneHandler extends ChannelInboundHandlerAdapter {
 
-    private final static Logger logger = LoggerFactory.getLogger(MessageHandler.class);
+    private final static Logger logger = LoggerFactory.getLogger(MessageChanneHandler.class);
+
+    @Autowired
+    private MessageHandler messageHandler;
 
     /**
      * 接收netty数据(拆包后的数据)
@@ -32,20 +37,26 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if(msg!=null){
             if(!(msg instanceof ByteBuf)) {
-                logger.warn("接收来自国标的数据不是ByteBuf类型!");
+                logger.warn("接收的数据不是ByteBuf类型!");
                 return;
             }
             ByteBuf byteBuf = (ByteBuf)msg;
             ByteBuffer byteBuffer = byteBuf.nioBuffer();
             byte[] bytes = ByteUtil.decodeValue(byteBuffer);
-            logger.info("receive:{}",ByteUtil.bytesToHexString(bytes));
+            if(logger.isDebugEnabled()){
+                logger.debug("receive:[{}]",ByteUtil.bytesToHexString(bytes,false));
+            }
+            messageHandler.doBusiness(bytes,ctx.channel());
         }
     }
 
+    /**
+     * 失去连接
+     */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception{
         Channel channel = ctx.channel();
-        logger.debug("client ip [{}] disconnected succeed",channel.remoteAddress().toString());
+        logger.info("客户端IP[{}]断连!",channel.remoteAddress().toString());
         if(CommonCache.channelSnMap.containsKey(channel)){
             String sn = CommonCache.channelSnMap.get(channel);
             CommonCache.channelSnMap.remove(channel);
@@ -63,28 +74,36 @@ public class MessageHandler extends ChannelInboundHandlerAdapter {
         super.channelInactive(ctx);
     }
 
+    /**
+     * 有新客户端连接接入
+     */
     @Override
     public void channelActive(ChannelHandlerContext ctx)  throws Exception{
-        logger.debug("client ip [{}] connected succeed",ctx.channel().remoteAddress().toString());
+        logger.info("client ip [{}] connected succeed",ctx.channel().remoteAddress().toString());
         super.channelActive(ctx);
     }
 
+    /**
+     * 输出异常信息
+     */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
+        Channel channel = ctx.channel();
+        logger.error("客户端IP["+channel.remoteAddress().toString()+"] exceptionCaught error",cause);
         super.exceptionCaught(ctx,cause);
     }
 
     /**
-     * 一定时间内(90S),ChannelRead未被调用,触发此方法
+     * 90秒内(时间可设置),ChannelRead未被调用或未发送数据,触发此方法
      */
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception{
         Channel channel = ctx.channel();
         if(evt instanceof IdleStateEvent){
             IdleState state = ((IdleStateEvent)evt).state();
-            //监听90秒未上报数据的空闲客户端连接,进行清理
+            //监听一定时间未上报数据的空闲客户端连接,进行清理
             if(state == IdleState.READER_IDLE){
+                logger.info("client ip [{}],该连接在一定时间内未收到任何消息,强制关闭连接!",ctx.channel().remoteAddress().toString());
                 channel.close();
             }
         }

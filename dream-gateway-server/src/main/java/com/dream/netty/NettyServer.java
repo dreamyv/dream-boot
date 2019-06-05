@@ -13,13 +13,15 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+/**
+ * netty服务端
+ */
 @Service
 @SuppressWarnings("all")
-public class DreamNettyServer extends AbstractNettyServer {
+public class NettyServer extends AbstractNettyServer {
 
     @Autowired
-    private MessageHandler messageHandler;
-
+    private MessageChanneHandler messageHandler;
     @Autowired
     private ProjectProperties properties;
 
