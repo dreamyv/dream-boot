@@ -8,6 +8,8 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.ByteBuffer;
+
 /**
  * 协议Decode拆包处理器
  */
@@ -38,9 +40,11 @@ public class MessageDecode extends LengthFieldBasedFrameDecoder {
         byteBuf = (ByteBuf) super.decode(ctx,byteBuf);
         try{
             MessageProtocol messageProtocol = this.decode(byteBuf);
-            return byteBuf;
+            return messageProtocol;
         }catch (Exception e){
-            logger.error("decode",e);
+            ByteBuffer byteBuffer = byteBuf.nioBuffer();
+            String hex = ByteUtil.byteBufferToHexString(byteBuffer);
+            logger.error("解码失败!hex:["+hex+"]",e);
             return null;
         }
     }

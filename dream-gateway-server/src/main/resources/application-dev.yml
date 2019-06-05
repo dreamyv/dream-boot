@@ -7,8 +7,8 @@ project:
   port: ${gatePort:8111}
   timeout: ${timeout:90}
   maxFrameLength: ${maxFrameLength:102400} #一条报文最大长度
-  lengthFieldOffset: ${lengthFieldOffset:22} #长度字段下标
-  lengthFieldLength: ${lengthFieldLength:2} #长度字段长度
+  lengthFieldOffset: ${lengthFieldOffset:59} #长度字段下标
+  lengthFieldLength: ${lengthFieldLength:4} #长度字段长度
   lengthAdjustment: ${lengthAdjustment:1} #数据(body)长度字段之后的字节数
   initialBytesToStrip: ${initialBytesToStrip:0} #忽略数据长度
   failFast: ${failFast:true}

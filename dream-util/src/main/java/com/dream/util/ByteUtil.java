@@ -4,10 +4,7 @@ package com.dream.util;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @SuppressWarnings("all")
 public class ByteUtil {
@@ -638,4 +635,86 @@ public class ByteUtil {
         Date date = DateUtil.parseDate(year, month, day, hour, minute, seconds);
         return date.getTime();
     }
+
+    /**
+     * ByteBuffer转HexString
+     */
+    public static String byteBufferToHexString(ByteBuffer byteBuffer) {
+        byte[] bytes = ByteUtil.decodeValue(byteBuffer);
+        return bytesToHexString(bytes);
+    }
+
+    /**
+     * long值转国标时间数组
+     */
+    public static byte[] longToGbTime(Long time){
+        Calendar calendar = longToCalendar(time);
+        byte[] bytes = CreateDateTimeBytes(calendar);
+        return bytesToGBDataTime(bytes);
+    }
+
+    /**
+     * long值转Calendar对象
+     */
+    public static Calendar longToCalendar(Long time){
+        Date date=new Date(time);
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTimeInMillis(time);
+        return calendar;
+    }
+
+    public static byte[] CreateDateTimeBytes(Calendar datetime) {
+        byte[] Reply = new byte[7];
+        Reply[0] = (byte) ((datetime.get(Calendar.YEAR) & 0xFF00) >> 8);
+        Reply[1] = (byte) (datetime.get(Calendar.YEAR) & 0xFF);
+        Reply[2] = (byte) (datetime.get(Calendar.MONTH)+1);
+        Reply[3] = (byte) (datetime.get(Calendar.DAY_OF_MONTH));
+        Reply[4] = (byte) (datetime.get(Calendar.HOUR_OF_DAY));
+        Reply[5] = (byte) (datetime.get(Calendar.MINUTE));
+        Reply[6] = (byte) (datetime.get(Calendar.SECOND));
+        return Reply;
+    }
+
+    //转成国标时间
+    public static byte[] bytesToGBDataTime(byte[] dataTimebytes) {
+        //国标时间0.year 1.month 2.day 3.hour 4.min 5.second
+        byte[] gbTime = new byte[6];
+        byte[] yearByte = { 0x00, 0x00 };
+        int yearInt = 0;
+        if(dataTimebytes.length==7) {
+            System.arraycopy(dataTimebytes, 0, yearByte, 0, 2);
+            yearInt = ByteUtil.getUnsignedInt(yearByte)-2000;
+            yearByte = ByteUtil.short2Byte((short)yearInt);
+            gbTime[0] = yearByte[1];
+            System.arraycopy(dataTimebytes, 2, gbTime, 1, 1);
+            System.arraycopy(dataTimebytes, 3, gbTime, 2, 1);
+            System.arraycopy(dataTimebytes, 4, gbTime, 3, 1);
+            System.arraycopy(dataTimebytes, 5, gbTime, 4, 1);
+            System.arraycopy(dataTimebytes, 6, gbTime, 5, 1);
+            return gbTime;
+        } else{
+            return null;
+        }
+    }
+
+    public static int getUnsignedInt(byte bytes[]) {
+        return byte2Short(bytes).shortValue() & 0xffff;
+    }
+
+    public static byte[] short2Byte(short x) {
+        byte bb[] = new byte[2];
+        bb[0] = (byte) (x >> 8);
+        bb[1] = (byte) (x >> 0);
+        return bb;
+    }
+
+    public static Short byte2Short(byte bb[]) {
+        if (bb != null && bb.length == 2) {
+            ByteBuffer aa = ByteBuffer.wrap(bb);
+            return Short.valueOf(aa.getShort());
+        } else {
+            return null;
+        }
+    }
+
 }

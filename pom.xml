@@ -50,6 +50,7 @@
         <spring-cloud-context.version>1.3.0.RELEASE</spring-cloud-context.version>
         <!-- 邮件 -->
         <spring-boot-starter-mail.version>1.5.2.RELEASE</spring-boot-starter-mail.version>
+        <fastjson.version>1.2.47</fastjson.version>
     </properties>
 
     <!-- 基础引用 -->
@@ -133,6 +134,11 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-staticdocs</artifactId>
             <version>${springfox.swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
         </dependency>
     </dependencies>
     <!-- 基础jar包引用结束 -->

@@ -1,6 +1,7 @@
 package com.dream.netty;
 
 import com.dream.core.netty.cache.CommonCache;
+import com.dream.core.protocol.MessageProtocol;
 import com.dream.handler.MessageHandler;
 import com.dream.util.ByteUtil;
 import io.netty.buffer.ByteBuf;
@@ -36,17 +37,11 @@ public class MessageChanneHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if(msg!=null){
-            if(!(msg instanceof ByteBuf)) {
-                logger.warn("接收的数据不是ByteBuf类型!");
+            if(!(msg instanceof MessageProtocol)) {
+                logger.warn("接收的数据不是MessageProtocol类型!");
                 return;
             }
-            ByteBuf byteBuf = (ByteBuf)msg;
-            ByteBuffer byteBuffer = byteBuf.nioBuffer();
-            byte[] bytes = ByteUtil.decodeValue(byteBuffer);
-            if(logger.isDebugEnabled()){
-                logger.debug("receive:[{}]",ByteUtil.bytesToHexString(bytes,false));
-            }
-            messageHandler.doBusiness(bytes,ctx.channel());
+            messageHandler.doBusiness((MessageProtocol)msg,ctx.channel());
         }
     }
 
