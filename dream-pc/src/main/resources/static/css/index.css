@@ -1,0 +1,512 @@
+@charset "utf-8";
+*{margin:0px;padding:0px;}
+html,body{
+	height: 100%;
+	width: 100%;
+	font-size: 12px;
+	font-family: "微软雅黑"
+}
+body{
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+ol,ul,li{
+	list-style: none;
+}
+.noselect{
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Chrome/Safari/Opera */
+	-khtml-user-select: none; /* Konqueror */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently not supported by any browser */
+	/*IE<10 在标签加 unselectable="on" 禁止选中字体*/
+}
+#warp{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+#warp .box_center{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+#warp .box_center .box{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow:hidden;
+}
+/*左侧导航*/
+#slider{
+	position: fixed;
+	top: 50%;
+	left: 20px;
+}	
+#slider ul li{
+	width: 15px;
+	height: 15px;
+	margin-bottom: 25px;
+	border-radius: 100%;
+	cursor: pointer;
+	background:#ccc;
+	position: relative;
+}
+#slider ul li .icons{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background: #585858;
+	position: absolute;
+	top:-7px;
+	left: -7px;
+	border-radius: 100%;
+	display: none;
+	text-align: center;
+	z-index:100;
+}
+#slider ul li .icons span{
+	font-size: 16px;
+	color: #fff;
+	z-index:100;
+}
+#slider ul li .tab{
+	width: 0px;
+	height:20px;
+	background: #585858;
+	z-index: 90;
+	position: absolute;
+	left:30px;
+	top: -3px;
+	border-radius: 50px;
+	text-align: center;
+	line-height: 20px;
+	font-size: 14px;
+	transition: width 0.5s;
+	overflow:hidden;
+	color: #fff;
+}
+#slider .music{
+	width: 15px;
+	height: 15px;
+	margin-bottom:35px;
+	cursor: pointer;
+	position: relative;
+	color:#fff;
+	
+}
+#slider .music .icon_music{
+	font-size: 22px;
+	width: 25px;
+	height: 25px;
+	margin-left: -5px;
+
+}
+#slider .music .tab{
+	width: 0px;
+	height:25px;
+	background: #585858;
+	z-index: 90;
+	position: absolute;
+	left:30px;
+	top: -3px;
+	border-radius: 50px;
+	text-align: center;
+	line-height: 25px;
+	font-size: 12px;
+	transition: width 0.3s;
+	overflow:hidden;
+	margin-top:3px;
+}
+#slider .music .icon_music.rotate{
+	-webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+    -webkit-animation: rotate 5s linear infinite;
+    -moz-animation: rotate 5s linear infinite;
+    -o-animation: rotate 5s linear infinite;
+    animation: rotate 5s linear infinite;
+}
+/*盒子1*/
+#warp .box_center .box.box1{
+	background-color:#b0b087
+}
+#warp .box_center .box.box2{
+	background-color:#8796b0
+}
+#warp .box_center .box.box3{
+	background-color:#000;
+}
+#warp .box_center .box.box4{
+	background-color:#87b08c;
+}
+#warp .box_center .box .myInfo{
+	width: 302px;
+	height: 100px;
+	position: relative;
+	margin: 0px auto;
+	color: #fff;
+}
+#warp .box_center .box .myInfo img{
+	border-radius:100%;	
+	cursor: pointer;
+	border:1px solid #ccc;
+	box-shadow: 3px 5px 7px #ccc;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+#warp .box_center .box .myInfo .info{
+	width: 198px;
+	position: absolute;
+	padding-top:25px; 
+	top: 0px;
+	right: 0px;
+	font-weight: bold;
+	font-size: 30px;
+	text-align: center;
+	text-shadow:10px 5px 20px #ccc;
+	-webkit-box-reflect: below 5px -webkit-linear-gradient(top,rgba(0,0,0,0) 40%,rgba(0,0,0,0.5) 100%);
+}
+#warp .box_center .box .content{
+	width: 80%;
+	height: 70%;
+	margin: 0px auto;
+	position: absolute;
+	top: 25%;
+	left:10%;
+}
+#warp .box_center .box .content .sign{
+	font-size: 22px;
+	color:#fff;
+	margin-top:60px;
+	margin-bottom:70px;
+	text-align: center;
+	line-height: 40px;
+	text-indent: 3rem;
+}
+#warp .box_center .box .content .sign_my{
+	font-size: 20px;
+	color:#fff;
+	text-align: center;
+	line-height: 40px;
+}
+
+/*音乐界面*/
+#box_left{
+	width: 100%;
+	height: 100%;
+	position:fixed;
+	top: 0px;
+	left: -100%;
+	margin-left:0px;
+	z-index: 100;
+	background:#d8d2d2;
+}
+#box_left .close{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	border-style: solid;
+    border-width: 0px 100px 100px 0px;
+    border-color: transparent #d0c033 transparent  transparent ;
+    width: 0px;
+    height: 0px;
+    cursor:pointer;
+}
+#box_left .close .back{
+	color: #fff;
+	position: absolute;
+	top: 13px;
+	right:-91px;
+	text-align: right;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 0 0 16px #654444;
+}
+#box_left .bottom{
+	padding-top: 10px;
+	width: 100%;
+	height: 50px;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	background: #000;
+}
+.controller{
+		width: 70%;
+		min-width: 980px;
+		margin:0px auto;
+		height: 100%;
+		padding-top: 2px;
+}
+.controller .con_box{
+	width:15%;
+	min-width: 154px;
+	height: 100%;
+	float: left;
+}
+.controller .con_box .con{
+	width: 41px;
+	height: 41px;
+	background-image: url(../img/icon.png) ;
+	float: left;
+	margin-left: 10px;
+	cursor: pointer;
+}
+.controller .con_box .pre{
+	background-position:-71px -112px;
+}
+.controller .con_box .play{
+	background-position:-136px -112px;
+}
+.controller .con_box .sotp{
+	background-position:-137px -193px;
+	display: none
+}
+.controller .con_box .next{
+	background-position:-201px -112px;
+}
+.controller .con_box .pre:hover{
+	background-position:-71px -151px;
+}
+.controller .con_box .play:hover{
+	background-position:-136px -152px;
+}
+.controller .con_box .sotp:hover{
+	background-position:-178px -193px;
+}
+.controller .con_box .next:hover{
+	background-position:-201px -152px;
+}
+.controller .con_slider{
+	width: 70%;
+	height: 100%;
+	float: left;
+	position: relative;
+	color:#fff;
+}
+.controller .con_slider .music_name,.music_time{
+	height: 20px;
+	position: absolute;
+	top: 0px;
+}
+.controller .con_slider .music_name{
+	left: 0px;
+}
+.controller .con_slider .music_time{
+	right: 0px;
+	text-align: right;
+}
+.controller .con_slider .music_slider,.music_slider_op{
+	width: 100%;
+	height: 3px;
+	position: absolute;
+	top:25px;
+	left: 0px;
+}
+.controller .con_slider .music_slider{
+	width: 100%;
+	background:rgba(255,255,255,.2);
+}
+.controller .con_slider .music_slider_op{
+	width: 10%;
+	background:#fff;
+}
+.controller .con_slider .music_slider_op .music_slider_playe{
+	width:11px;
+	height:11px;
+	border-radius: 100%;
+	background: #fff;
+	position: absolute;
+	top: -4px;
+	right: -2px;
+	cursor: pointer;
+	z-index: 100;
+}
+.controller .con_arge{
+	width: 14%;
+	height: 100%;
+	float: right;
+	position: relative;
+}
+.controller .con_arge .sound_img{
+	width: 23px;
+	height: 23px;
+	background-image: url(../img/icon.png);
+	cursor: pointer;
+	position: absolute;
+	top: 10px;
+	left: 5px;
+	display: none;
+}
+.controller .con_arge .sound_img_1{
+	background-position: -18px -112px;
+	display: block;
+}
+.controller .con_arge .sound_img_2{
+	background-position: -18px -141px;
+}
+.controller .con_arge .sound_img_3{
+	background-position: -18px -170px;
+}
+.controller .con_arge .sound_img_4{
+	background-position: -18px -200px;
+}
+.controller .con_arge .sound_img_1:hover{
+	background-position: -47px -112px;
+}
+.controller .con_arge .sound_img_2:hover{
+	background-position: -47px -141px;
+}
+.controller .con_arge .sound_img_3:hover{
+	background-position: -47px -170px;
+}
+.controller .con_arge .sound_img_4:hover{
+	background-position: -47px -200px;
+}
+
+.controller .con_arge .music_volume{
+	width: 100px;
+	height: 100%;
+	margin-left:35px;
+	position: relative;
+}
+.controller .con_arge .music_volume .volume_img{
+	width: 22px;
+	height: 16px;
+	background: url(../img/icon.png) -262px -113px;
+	cursor:pointer;
+	margin-top:12px;
+}
+.controller .con_arge .music_volume .volume_img:hover{
+	background-position: -262px -128px;
+}
+.controller .con_arge .music_volume .volume{
+	width: 70px;
+	height: 2px;
+	position: absolute;
+	top: 7px;
+	left:27px;
+}
+.controller .con_arge .music_volume .vol_slider{
+	width: 70px;
+	background: rgba(255,255,255,.2);
+	height: 3px;
+	position: absolute;
+	cursor: pointer;
+}
+.controller .con_arge .music_volume .vol_slider_op{
+	width: 50%;
+	height: 3px;
+	background:#fff;
+	position: absolute;
+}
+.controller .con_arge .music_volume .vol_slider_op .vol_slider_playe{
+	width: 9px;
+	height: 9px;
+	border-radius: 100%;
+	background: #fff;
+	position: absolute;
+	top: -3px;
+	right: -3px;
+	cursor: pointer;
+	z-index: 100;
+}
+/*盒子2*/
+#warp .box_center .box .about{
+	width: 80%;
+	height: 80%;
+	margin: 0px auto;
+	position: absolute;
+	top: 10%;
+	left:10%;
+	
+}
+#warp .box_center .box .about .about_title{
+	width: 120px;
+	height: 30px;
+	margin: 0px auto;
+	text-align: center;
+	color: #fff;
+	letter-spacing: 4px;
+	font-size: 14px;
+}
+#warp .box_center .box .about .about_title span{
+	width: 50%;
+	height: 0px;
+	border-top: 2px #fff solid;
+	display: block;
+	margin-top:2px;
+	margin:0px auto;
+}
+#warp .box_center .box .about .about_me{
+	width: 80%;
+	font-size: 20px;
+	color:#fff;
+	padding-top: 30px;
+	text-indent: 2.4rem;
+	margin: 0px auto;
+	line-height: 35px;
+	padding-bottom: 20px;	
+}
+#myEcharts{
+	width: 600px;height:400px;
+	margin: 0px auto;
+}
+/*盒子3*/
+#warp .box_center .box3 #perspective{
+						perspective: 800px;/*景深*/
+						height: 100%;
+}
+#warp .box_center .box3  h1{
+	color:#fff;
+	width: 200px;
+	text-align: center;
+	margin: 10px auto;
+	position: absolute;
+	left: 50%;
+	top: 1px;
+	margin-left: -100px;
+	letter-spacing: 4px;
+}
+#warp .box_center .box3 #case{
+	width: 120px;
+    height: 180px;
+    margin:0px auto;
+    position: relative;
+    transform-style: preserve-3d;/*3D效果*/
+    transform: rotateX(-30deg) rotateY(0deg ) ;
+}
+#warp .box_center .box3 #case li{
+	background: #306d5d;
+	cursor: pointer;
+	text-align: center;
+	font-size: 20px;
+	line-height: 100px;
+	width:100%;
+	height:100%;	
+	position: absolute;
+	border-radius: 5px;
+	border:1px solid rgba(255,255,255,0.8);
+	box-shadow:0 2px 19px rgba(255,255,255,0.8);
+	transform:rotateY(0deg) translateZ(0px);
+	transition:1s;
+	/*倒影: 朝向 偏移 遮盖*//*线性渐变(从哪里开始,开始的颜色，结束的颜色)*/
+	-webkit-box-reflect: below 5px -webkit-linear-gradient(top,rgba(0,0,0,0) 40%,rgba(0,0,0,0.5) 100%);
+}
+#warp .box_center .box3 #case p{
+	width: 1200px;
+	height: 1200px;
+	position: absolute;
+	top: 100%;
+	left:50%;
+	margin-top: -595px;
+	margin-left: -600px;
+	border-radius: 100%;
+	transform: rotateX(90deg);
+	/*渐变色:*/
+	background: -webkit-radial-gradient(center center,600px 600px,rgba(0,137,255,0.2),rgba(0,0,0,0));
+}

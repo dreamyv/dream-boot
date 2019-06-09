@@ -1,0 +1,16 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/ #指定模板所在的目录
+    check-template-location: true #检查模板路径是否存在
+    cache: false #是否缓存，开发模式下设置为false，避免改了模板还要重启服务器，线上设置为true，可以提高性能
+    suffix: .html
+    encoding: UTF-8
+    content-type: text/html  #与Servlet中设置输出对应属性效果一致
+    mode: HTML5
+
+logging:
+  level:
+    com.dream.server: ${logging_level:debug}
+
+project:
+

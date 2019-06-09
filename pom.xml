@@ -23,6 +23,7 @@
         <module>dream-gateway-server</module>
         <module>dream-gateway-tcu</module>
         <module>dream-util</module>
+        <module>dream-pc</module>
     </modules>
 
     <properties>
