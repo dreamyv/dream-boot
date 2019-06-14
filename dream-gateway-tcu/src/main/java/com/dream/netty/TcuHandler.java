@@ -4,7 +4,7 @@ import com.dream.core.protocol.MessageCommand;
 import com.dream.core.protocol.MessageEncryption;
 import com.dream.core.protocol.ProtocolVersion;
 import com.dream.util.ByteUtil;
-import com.dream.util.Constans;
+import com.dream.util.common.Constans;
 import com.dream.util.UUIDUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;

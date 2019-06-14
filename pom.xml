@@ -52,6 +52,9 @@
         <!-- 邮件 -->
         <spring-boot-starter-mail.version>1.5.2.RELEASE</spring-boot-starter-mail.version>
         <fastjson.version>1.2.47</fastjson.version>
+        <!-- 压缩 -->
+        <commons-compress.version>1.4.1</commons-compress.version>
+        <poi.version>3.9</poi.version>
     </properties>
 
     <!-- 基础引用 -->

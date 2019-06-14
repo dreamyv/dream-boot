@@ -1,4 +1,4 @@
-package com.dream.util;
+package com.dream.util.common;
 
 /**
  * 静态常量类
