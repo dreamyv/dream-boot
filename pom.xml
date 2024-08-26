@@ -29,7 +29,7 @@
         <!--kafka-->
         <kafka.version>0.10.2.0</kafka.version>
         <!-- 对Swagger的集成 -->
-        <springfox.swagger2.version>2.6.1</springfox.swagger2.version>
+        <springfox.swagger2.version>2.10.0</springfox.swagger2.version>
         <!-- Spring Boot对MyBatis的集成-->
         <mybatis.spring.boot.starter.version>1.2.0</mybatis.spring.boot.starter.version>
         <!--protostuff-->
